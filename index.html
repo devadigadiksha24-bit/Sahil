@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Valentine Surprise</title>
+
+<style>
+    * {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f9c5d1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 16px;
+}
+
+/* floating background hearts */
+.bg-heart {
+    position: absolute;
+    font-size: 16px;
+    opacity: 0.15;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-120px); }
+}
+
+.card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 340px;
+    padding: 28px 20px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    position: absolute;
+    transition: all 0.4s ease;
+}
+
+/* Question Card */
+#questionCard {
+    z-index: 2;
+}
+
+.emoji {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+h1 {
+    font-size: clamp(18px, 4.5vw, 20px);
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.buttons {
+    position: relative;
+    height: 90px;
+}
+
+.yes-btn {
+    background: linear-gradient(135deg, #ff6fae, #ff3d7f);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 61, 127, 0.45);
+}
+
+/* No button */
+.no-btn {
+    background: #eee;
+    color: #777;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+/* Success Card */
+#successCard {
+    display: none;
+    z-index: 3;
+}
+
+.heart {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: clamp(24px, 6vw, 28px);
+    font-weight: 700;
+    color: #ff4f8b;
+    margin-bottom: 8px;
+}
+
+.text {
+    font-size: clamp(14px, 4vw, 16px);
+    color: #444;
+    line-height: 1.6;
+}
+
+.text span {
+    color: #ff4f8b;
+    font-weight: 500;
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .buttons {
+        height: 80px;
+    }
+
+    .yes-btn {
+        padding: 12px 26px;
+        font-size: 15px;
+    }
+
+    .no-btn {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts background -->
+<script>
+    for (let i = 0; i < 14; i++) {
+        const heart = document.createElement("div");
+        heart.className = "bg-heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+        document.body.appendChild(heart);
+    }
+</script>
+
+<!-- Question Card -->
+<div class="card" id="questionCard">
+    <div class="emoji">💌</div>
+    <h1>Sahil will you be my valentine?</h1>
+
+    <div class="buttons">
+        <button class="yes-btn" onclick="showSuccess()">Yes 💖✨</button>
+        <button class="no-btn" id="noBtn">No 🙈</button>
+    </div>
+</div>
+
+<!-- Success Card -->
+<div class="card" id="successCard">
+    <div class="heart">💖✨</div>
+    <div class="title">Yay! 🎉</div>
+    <div class="text">
+        I knew you’d say yes! <br />
+        <span>Happy Valentine’s Day, Sahil! 💕</span>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+
+    // No button runs away
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 200 - 100;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function showSuccess() {
+        document.getElementById("questionCard").style.display = "none";
+        const success = document.getElementById("successCard");
+        success.style.display = "block";
+        success.style.transform = "scale(1)";
+    }
+</script>
+
+</body>
+</html>
